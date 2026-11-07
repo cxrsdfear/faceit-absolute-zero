@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Faceit Absolute Zero",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "description": "Свой фон и стеклянная тема для faceit.com.",
   "permissions": [
     "storage",
+    "clipboardWrite",
     "unlimitedStorage",
     "alarms"
   ],
