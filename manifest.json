@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "Faceit Absolute Zero",
+  "version": "1.2.0",
+  "description": "Свой фон и стеклянная тема для faceit.com.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "alarms"
+  ],
+  "action": {
+    "default_title": "Faceit Absolute Zero",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "changes.json",
+        "sakura.jpg",
+        "wings.jpg",
+        "cat.jpg",
+        "lily.jpg",
+        "icon128.png",
+        "assets/cards/standard.jpg",
+        "assets/cards/super.jpg",
+        "assets/cards/premium.jpg",
+        "assets/katana.jpg"
+      ],
+      "matches": [
+        "https://www.faceit.com/*",
+        "https://faceit.com/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.faceit.com/*",
+        "https://faceit.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "host_permissions": [
+    "https://www.faceit.com/*",
+    "https://faceit.com/*",
+    "https://ipwho.is/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
