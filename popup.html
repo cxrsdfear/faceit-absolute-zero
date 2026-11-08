@@ -21,7 +21,34 @@ display: grid; grid-template-columns: 164px 1fr; width: 560px; height: 440px; ma
 background: var(--bg); color: var(--text);
 font: 13px/1.35 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
 }
-/* Moving backdrop: a faint spider and a soft light that follow the mouse */
+/* Moving backdrop: soft lights that follow the mouse */
+.fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.fx::before { content: ""; position: absolute; width: 360px; height: 360px; left: 0; top: 0; border-radius: 50%;
+background: radial-gradient(circle, rgba(160,140,255,.16), transparent 62%);
+transform: translate(calc(var(--cx, 300px) - 180px), calc(var(--cy, 200px) - 180px)); transition: transform .18s ease-out; }
+.fx::after { content: ""; position: absolute; width: 420px; height: 420px; right: -160px; bottom: -190px; border-radius: 50%;
+background: radial-gradient(circle, rgba(239,157,220,.17), transparent 64%);
+transform: translate(calc(var(--mx, 0) * -28px), calc(var(--my, 0) * -20px)); transition: transform .3s ease-out; }
+nav, main { position: relative; z-index: 1; }
+/* Left: brand, sections, on/off */
+nav { display: flex; flex-direction: column; gap: 2px; padding: 16px 10px 12px; background: var(--side); border-right: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 9px; padding: 0 6px 16px; }
+.brand { position: relative; padding-bottom: 18px; }
+.brand img { position: relative; z-index: 1; width: 38px; height: 38px; border-radius: 50%; object-fit: cover;
+box-shadow: 0 0 0 2px rgba(255,255,255,.2), 0 0 20px var(--glow), 0 6px 14px rgba(0,0,0,.5);
+transform: translate(calc(var(--mx, 0) * 3px), calc(var(--my, 0) * 3px)); }
+.brand::before { content: ""; position: absolute; left: 3px; top: -4px; width: 46px; height: 46px; border-radius: 50%;
+background: conic-gradient(from 0deg, transparent 0 40%, var(--a), var(--b), transparent 90%);
+-webkit-mask: radial-gradient(circle, transparent 21px, #000 22px); mask: radial-gradient(circle, transparent 21px, #000 22px);
+animation: ring 3.2s linear infinite; }
+@keyframes ring { to { transform: rotate(360deg); } }
+.brand b { margin-left: 2px; }
+nav { position: relative; z-index: 3; }
+.tab { border-radius: 14px; }
+.tile { border-radius: 16px; }
+.power.opt, .about div { border-radius: 14px; }
+input[type=url], input[type=text], input[type=date], select, button.small, button.ghost { border-radius: 12px; }
+/* Moving backdrop: soft lights that follow the mouse */
 .fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .fx::before { content: ""; position: absolute; width: 360px; height: 360px; left: 0; top: 0; border-radius: 50%;
 background: radial-gradient(circle, rgba(160,140,255,.16), transparent 62%);
@@ -120,10 +147,10 @@ input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); }
 </style>
 </head>
 <body>
-<div class="fx"><img src="assets/spider.png" alt=""></div>
+<div class="fx"></div>
 <nav>
 <div class="brand">
-<img src="assets/spider.png" alt="">
+<img src="icon128.png" alt="">
 <b>Absolute Zero<small>тема для FACEIT</small></b>
 </div>
 <button class="tab" data-page="bg"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>Фон</button>
