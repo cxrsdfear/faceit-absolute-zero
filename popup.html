@@ -15,53 +15,33 @@
 --glow: rgba(239,157,220,.45);
 }
 * { box-sizing: border-box; }
-html { color-scheme: dark; background: var(--bg); }
+html { color-scheme: dark; background: transparent; }
 body {
 display: grid; grid-template-columns: 164px 1fr; width: 560px; height: 440px; margin: 0; overflow: hidden;
-background: var(--bg); color: var(--text);
+background: var(--bg); color: var(--text); border-radius: 20px;
 font: 13px/1.35 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
 }
-/* Moving backdrop: soft lights that follow the mouse */
-.fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+/* Left: brand, sections, on/off */
+nav { display: flex; flex-direction: column; gap: 2px; padding: 16px 10px 12px; background: var(--side); border-right: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 9px; padding: 0 6px 16px; }
+.mark { position: relative; flex: none; display: grid; place-items: center; width: 46px; height: 46px; }
+.mark img { position: relative; z-index: 1; width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+box-shadow: 0 0 0 2px rgba(255,255,255,.2), 0 0 20px var(--glow), 0 6px 14px rgba(0,0,0,.5);
+transform: translate(calc(var(--mx, 0) * 3px), calc(var(--my, 0) * 3px)); }
+.mark::before { content: ""; position: absolute; inset: 0; border-radius: 50%;
+background: conic-gradient(from 0deg, transparent 0 35%, var(--a), var(--b), transparent 92%);
+-webkit-mask: radial-gradient(circle, transparent 21px, #000 22px); mask: radial-gradient(circle, transparent 21px, #000 22px);
+animation: ring 3.2s linear infinite; }
+@keyframes ring { to { transform: rotate(360deg); } }
+nav, main { position: relative; z-index: 1; }
+nav { z-index: 3; }
+.fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; border-radius: 20px; }
 .fx::before { content: ""; position: absolute; width: 360px; height: 360px; left: 0; top: 0; border-radius: 50%;
 background: radial-gradient(circle, rgba(160,140,255,.16), transparent 62%);
 transform: translate(calc(var(--cx, 300px) - 180px), calc(var(--cy, 200px) - 180px)); transition: transform .18s ease-out; }
 .fx::after { content: ""; position: absolute; width: 420px; height: 420px; right: -160px; bottom: -190px; border-radius: 50%;
 background: radial-gradient(circle, rgba(239,157,220,.17), transparent 64%);
 transform: translate(calc(var(--mx, 0) * -28px), calc(var(--my, 0) * -20px)); transition: transform .3s ease-out; }
-nav, main { position: relative; z-index: 1; }
-/* Left: brand, sections, on/off */
-nav { display: flex; flex-direction: column; gap: 2px; padding: 16px 10px 12px; background: var(--side); border-right: 1px solid var(--line); }
-.brand { display: flex; align-items: center; gap: 9px; padding: 0 6px 16px; }
-.brand { position: relative; padding-bottom: 18px; }
-.brand img { position: relative; z-index: 1; width: 38px; height: 38px; border-radius: 50%; object-fit: cover;
-box-shadow: 0 0 0 2px rgba(255,255,255,.2), 0 0 20px var(--glow), 0 6px 14px rgba(0,0,0,.5);
-transform: translate(calc(var(--mx, 0) * 3px), calc(var(--my, 0) * 3px)); }
-.brand::before { content: ""; position: absolute; left: 3px; top: -4px; width: 46px; height: 46px; border-radius: 50%;
-background: conic-gradient(from 0deg, transparent 0 40%, var(--a), var(--b), transparent 90%);
--webkit-mask: radial-gradient(circle, transparent 21px, #000 22px); mask: radial-gradient(circle, transparent 21px, #000 22px);
-animation: ring 3.2s linear infinite; }
-@keyframes ring { to { transform: rotate(360deg); } }
-.brand b { margin-left: 2px; }
-nav { position: relative; z-index: 3; }
-.tab { border-radius: 14px; }
-.tile { border-radius: 16px; }
-.power.opt, .about div { border-radius: 14px; }
-input[type=url], input[type=text], input[type=date], select, button.small, button.ghost { border-radius: 12px; }
-/* Moving backdrop: soft lights that follow the mouse */
-.fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.fx::before { content: ""; position: absolute; width: 360px; height: 360px; left: 0; top: 0; border-radius: 50%;
-background: radial-gradient(circle, rgba(160,140,255,.16), transparent 62%);
-transform: translate(calc(var(--cx, 300px) - 180px), calc(var(--cy, 200px) - 180px)); transition: transform .18s ease-out; }
-.fx img { position: absolute; right: -40px; bottom: -70px; width: 260px; opacity: .1; filter: saturate(1.2);
-transform: translate(calc(var(--mx, 0) * -18px), calc(var(--my, 0) * -12px)); transition: transform .25s ease-out; }
-nav, main { position: relative; z-index: 1; }
-/* Left: brand, sections, on/off */
-nav { display: flex; flex-direction: column; gap: 2px; padding: 16px 10px 12px; background: var(--side); border-right: 1px solid var(--line); }
-.brand { display: flex; align-items: center; gap: 9px; padding: 0 6px 16px; }
-.brand { position: relative; height: 62px; padding-bottom: 0; }
-.brand img { position: absolute; left: -2px; top: -14px; width: 42px; height: 78px; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(0,0,0,.55)) drop-shadow(0 0 12px var(--glow)); transform: translate(calc(var(--mx, 0) * 5px), calc(var(--my, 0) * 4px)); pointer-events: none; }
-.brand b { margin-left: 40px; }
 .brand b { white-space: nowrap; font-size: 13px; font-weight: 800; letter-spacing: .02em; line-height: 1.1; }
 .brand small { display: block; color: var(--dim); font-size: 10px; font-weight: 500; }
 .tab {
@@ -70,14 +50,36 @@ background: none; color: var(--dim); font: inherit; font-weight: 600; text-align
 transition: background .18s, color .18s;
 }
 .tab svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.tab { overflow: hidden; }
+.tab { overflow: hidden; z-index: 1; border-radius: 14px; }
 .tab::after { content: ""; position: absolute; inset: 0; background: radial-gradient(90px circle at var(--px, 50%) 50%, rgba(239,157,220,.16), transparent 70%); opacity: 0; transition: opacity .2s; pointer-events: none; }
 .tab:hover::after { opacity: 1; }
+.tab svg { transition: transform .3s cubic-bezier(.3,1.6,.5,1); }
+.tab:hover svg { transform: scale(1.18) rotate(-6deg); }
 .tab:hover { color: var(--text); background: rgba(255,255,255,.04); }
-.tab.on { color: var(--text); background: rgba(255,255,255,.07); }
-.tab.on::before { content: ""; position: absolute; left: -10px; top: 9px; bottom: 9px; width: 3px; border-radius: 0 3px 3px 0; background: linear-gradient(var(--a), var(--b)); box-shadow: 0 0 10px var(--glow); }
+.tab.on { color: var(--text); background: none; }
+.tab.on svg { color: var(--a); filter: drop-shadow(0 0 6px var(--glow)); }
 .power { white-space: nowrap; gap: 8px; display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding: 10px 8px 0; border-top: 1px solid var(--line); color: var(--dim); font-size: 12px; font-weight: 600; }
 .power.opt { margin: 0 0 14px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; color: #fff; }
+/* The highlight and the bar on the left slide to the section you open */
+.glide { position: absolute; z-index: 0; left: 10px; right: 10px; top: 0; height: 36px; border-radius: 14px; pointer-events: none;
+background: linear-gradient(90deg, rgba(239,157,220,.16), rgba(160,140,255,.06) 70%, transparent);
+box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+transition: transform .42s cubic-bezier(.3,1.35,.5,1); }
+.glide::before { content: ""; position: absolute; left: -10px; top: 7px; bottom: 7px; width: 4px; border-radius: 0 4px 4px 0;
+background: linear-gradient(var(--a), var(--b)); box-shadow: 0 0 14px var(--glow), 0 0 4px var(--a); animation: bar 2.4s ease-in-out infinite; }
+@keyframes bar { 50% { box-shadow: 0 0 22px var(--a), 0 0 6px var(--a); } }
+.page.on > * { animation: rise .45s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i, 0) * 45ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(12px) scale(.985); } }
+.gallery .tile { animation: pop .5s cubic-bezier(.3,1.4,.5,1) both; animation-delay: calc(var(--i, 0) * 55ms + 120ms); }
+@keyframes pop { from { opacity: 0; transform: scale(.88) translateY(8px); } }
+button.small, button.ghost, .tile { position: relative; overflow: hidden; }
+.rip { position: absolute; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(255,255,255,.55), transparent 65%); transform: scale(0); animation: rip .6s ease-out forwards; }
+@keyframes rip { to { transform: scale(1); opacity: 0; } }
+.switch input:checked + i { animation: glow 2.6s ease-in-out infinite; }
+@keyframes glow { 50% { box-shadow: 0 0 20px var(--a); } }
+.power.opt, .about div { border-radius: 14px; }
+input[type=url], input[type=text], input[type=date], select, button.small, button.ghost { border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 /* Right: one section at a time */
 main { position: relative; overflow-y: auto; padding: 20px 22px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.15) transparent; }
 .page { display: none; animation: in .25s ease; }
@@ -101,9 +103,8 @@ box-shadow: inset 0 0 0 1px var(--line);
 transition: transform .22s cubic-bezier(.3,1.4,.5,1), box-shadow .2s;
 }
 .tile::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(8,7,12,.75)); }
-.tile { transform-style: preserve-3d; will-change: transform; }
-.tile:hover { transform: perspective(500px) rotateX(calc(var(--ty, 0) * -5deg)) rotateY(calc(var(--tx, 0) * 6deg)) translateY(-2px); }
-.tile:hover { background-position: calc(50% + var(--tx, 0) * 5%) calc(50% + var(--ty, 0) * 5%); }
+.tile { transform-style: preserve-3d; will-change: transform; border-radius: 16px; }
+.tile:hover { transform: perspective(500px) rotateX(calc(var(--ty, 0) * -5deg)) rotateY(calc(var(--tx, 0) * 6deg)) translateY(-2px); background-position: calc(50% + var(--tx, 0) * 5%) calc(50% + var(--ty, 0) * 5%); }
 .tile:active { transform: scale(.97); }
 .tile span { position: absolute; left: 10px; bottom: 7px; z-index: 1; color: #fff; font-size: 11.5px; font-weight: 700; }
 .tile.on { box-shadow: inset 0 0 0 2px var(--a), 0 0 18px var(--glow); }
@@ -149,8 +150,9 @@ input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); }
 <body>
 <div class="fx"></div>
 <nav>
+<i class="glide"></i>
 <div class="brand">
-<img src="icon128.png" alt="">
+<span class="mark"><img src="icon128.png" alt=""></span>
 <b>Absolute Zero<small>тема для FACEIT</small></b>
 </div>
 <button class="tab" data-page="bg"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>Фон</button>
