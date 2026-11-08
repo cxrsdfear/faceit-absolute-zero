@@ -17,22 +17,18 @@
 * { box-sizing: border-box; }
 html { color-scheme: dark; background: transparent; }
 body {
-display: grid; grid-template-columns: 164px 1fr; width: 560px; height: 440px; margin: 0; overflow: hidden;
+display: grid; grid-template-columns: 176px 1fr; width: 560px; height: 440px; margin: 0; overflow: hidden;
 background: var(--bg); color: var(--text); border-radius: 20px;
 font: 13px/1.35 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
 }
 /* Left: brand, sections, on/off */
 nav { display: flex; flex-direction: column; gap: 2px; padding: 16px 10px 12px; background: var(--side); border-right: 1px solid var(--line); }
-.brand { display: flex; align-items: center; gap: 9px; padding: 0 6px 16px; }
-.mark { position: relative; flex: none; display: grid; place-items: center; width: 46px; height: 46px; }
-.mark img { position: relative; z-index: 1; width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
-box-shadow: 0 0 0 2px rgba(255,255,255,.2), 0 0 20px var(--glow), 0 6px 14px rgba(0,0,0,.5);
-transform: translate(calc(var(--mx, 0) * 3px), calc(var(--my, 0) * 3px)); }
-.mark::before { content: ""; position: absolute; inset: 0; border-radius: 50%;
-background: conic-gradient(from 0deg, transparent 0 35%, var(--a), var(--b), transparent 92%);
--webkit-mask: radial-gradient(circle, transparent 21px, #000 22px); mask: radial-gradient(circle, transparent 21px, #000 22px);
-animation: ring 3.2s linear infinite; }
-@keyframes ring { to { transform: rotate(360deg); } }
+.brand { display: flex; align-items: center; gap: 8px; padding: 0 4px 16px; min-width: 0; }
+.mark { flex: none; align-self: center; width: 40px; height: 40px; }
+.mark img { display: block; width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+box-shadow: 0 0 0 2px rgba(239,157,220,.55), 0 0 16px var(--glow), 0 4px 12px rgba(0,0,0,.5); }
+.tab:focus, .tab:focus-visible, button:focus { outline: none; }
+.tab:focus-visible { box-shadow: inset 0 0 0 1px rgba(239,157,220,.5); }
 nav, main { position: relative; z-index: 1; }
 nav { z-index: 3; }
 .fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; border-radius: 20px; }
@@ -42,7 +38,7 @@ transform: translate(calc(var(--cx, 300px) - 180px), calc(var(--cy, 200px) - 180
 .fx::after { content: ""; position: absolute; width: 420px; height: 420px; right: -160px; bottom: -190px; border-radius: 50%;
 background: radial-gradient(circle, rgba(239,157,220,.17), transparent 64%);
 transform: translate(calc(var(--mx, 0) * -28px), calc(var(--my, 0) * -20px)); transition: transform .3s ease-out; }
-.brand b { white-space: nowrap; font-size: 13px; font-weight: 800; letter-spacing: .02em; line-height: 1.1; }
+.brand b { white-space: nowrap; font-size: 12.5px; font-weight: 800; letter-spacing: .02em; line-height: 1.1; }
 .brand small { display: block; color: var(--dim); font-size: 10px; font-weight: 500; }
 .tab {
 position: relative; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border: 0; border-radius: 10px;
